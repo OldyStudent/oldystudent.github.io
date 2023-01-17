@@ -1,0 +1,66 @@
+@use "sass:math";
+@use "variables";
+
+//  FUNCTIONS ------------------------------------------
+
+// Retrieves property value based on the breakpoints_config map
+@function get-value($breakpoint, $property) {
+    @return map-get(map-get(variables.$breakpoints_config, $breakpoint), $property);
+}
+
+//  MIXINS ------------------------------------------
+
+// Center an element horizontally and vertically mixin
+@mixin center-horizontally-and-vertically {
+    display: grid;
+    place-items: center;
+}
+
+// Generates a linear gradient
+@mixin add-gradient($color-a, $color-b, $direction: "to bottom") {
+    background-image: linear-gradient(#{$direction}, $color-a 0%, $color-b 100%);
+}
+
+// Add a box-shadow mixin
+@mixin add-shadow($transparency: 20%) {
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / #{$transparency});
+}
+
+// Add a media query mixin
+@mixin media-query($breakpoint) {
+    @media screen and (min-width: get-value($breakpoint, min-width)) {
+        $inner-padding: get-value($breakpoint, padding-inline);
+        $fz-header: get-value($breakpoint, fz-header);
+        $fz-footer: get-value($breakpoint, fz-footer);
+
+        section {
+            padding-inline: $inner-padding;
+        }
+
+        .header {
+            font-size: $fz-header;
+            @if $breakpoint != mobile {
+                padding-inline: $inner-padding;
+                margin-block: $inner-padding * 0.5;
+            }
+        }
+
+        @content;
+
+        .footer {
+            @include footer($fz-footer, $inner-padding);
+        }
+    }
+}
+
+// Create keyframe animation for visibility
+@mixin animate-visiblity($animation-name, $opacity, $zindex: 0) {
+    @keyframes #{$animation-name} {
+        100% {
+            opacity: $opacity;
+            @if $zindex != 0 {
+                z-index: $zindex;
+            }
+        }
+    }
+}

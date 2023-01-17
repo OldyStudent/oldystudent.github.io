@@ -1,0 +1,94 @@
+@include media-query(desktop) {
+
+    /*==============================
+        MAIN
+        |_ PICKUP LINES SECTION
+    ==============================*/
+
+    .pickup-lines {
+        &__title {
+            font-size: 38px;
+        }
+
+        &__subtitle {
+            margin-block: 28px 48px;
+        }
+
+        .button {
+            min-height: 54px;
+        }
+    }
+
+    /*==============================
+        MAIN
+        |_ OPERATION SECTION
+    ==============================*/
+
+    .operation {
+        padding-block: 64px 80px;
+
+        &__title{
+            margin-bottom: 32px;
+        }
+
+        &__container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        &__step {
+            overflow: hidden;
+
+            p {
+                margin-left: 56px;
+            }
+
+            i {
+                font-size: 24px;
+            }
+
+            &::before {
+                height: 150%;
+                font-size: 32px;
+                left: -32px;
+                top: inherit;
+                padding-inline: min(20%, 64px) min(13%, 64px);
+                animation-name: slide-in-horizontal;
+            }
+        }
+    }
+
+    /*==============================
+        MAIN
+        |_ RESTAURANT LIST SECTION
+    ==============================*/
+
+    .restaurants {
+
+        &__title {
+            margin-bottom: 36px;
+        }
+
+        &__container {
+            gap: 32px;
+        }
+    }
+
+    .restaurant-card {
+
+        &__thumbnail {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+        }
+
+        &__footer {
+            padding: 16px 24px;
+
+            &__favorite {
+                @include heart-btn(28px, 3px);
+            }
+        }
+    }
+}

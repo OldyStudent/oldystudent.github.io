@@ -1,0 +1,186 @@
+@include media-query(mobile) {
+    /*==============================
+        HEADER
+    ==============================*/
+    .header {
+        @include header;
+        &__location {
+            @include center-horizontally-and-vertically;
+            background-color: $color__gray--medium;
+            font-size: $font-size__base--small;
+            color: $color__gray--darker;
+            font-weight: bold;
+            padding-block: 15px;
+            position: relative;
+            width: 100%;
+
+            i {
+                margin-right: 10px;
+            }
+
+            &::before {
+                content: '';
+                height: 4px;
+                @include add-gradient(#cecece, transparent);
+                position: absolute;
+                width: 100%;
+                top: 0;
+            }
+        }
+    }
+
+    /*==============================
+        MAIN
+        |_ PICKUP LINES SECTION
+    ==============================*/
+
+    .pickup-lines {
+        @include center-horizontally-and-vertically;
+        background-color: $color__gray--light;
+        padding-block: 38px 58px;
+        text-align: center;
+
+        &__title {
+            padding-inline: 45px;
+        }
+
+        &__subtitle {
+            margin-block: 14px 28px;
+        }
+    }
+
+    /*==============================
+        MAIN
+        |_ OPERATION SECTION
+    ==============================*/
+
+    .operation {
+
+        padding-block: 48px;
+
+        &__title {
+            margin-bottom: 32px;
+        }
+
+        &__container {
+            display: flex;
+            flex-direction: column;
+            font-size: $font-size__base--smaller;
+            gap: 28px;
+            counter-reset: index;
+        }
+
+        &__step {
+            @include add-shadow;
+            position: relative;
+            background-color: $color__gray--light;
+            counter-increment: index;
+            padding-block: 25px;
+            border-radius: 18px;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+
+            p {
+                margin-left: 35px;
+            }
+
+            i {
+                font-size: 20px;
+                padding-right: 15px;
+                color: $color__gray--dark;
+                vertical-align: bottom;
+            }
+
+            &::before {
+                $size: 24px;
+                @include center-horizontally-and-vertically;
+                content: counter(index);
+                width: $size;
+                height: $size;
+                font-size: $size * 0.58;
+                background-color: $color__purple;
+                border-radius: 50%;
+                position: absolute;
+                left: $size * -.45;
+                color: white;
+                animation: slide-in-horizontal 400ms both;
+            }
+
+            &:last-child {
+                background-color: $color__purple--lighter;
+                i {
+                    color: $color__purple;
+                }
+            }
+
+            @for $i from 1 through 3 {
+                &:nth-child(#{$i})::before {
+                    animation-delay: (200ms * $i);
+                }
+            }
+        }
+    }
+
+
+    /*==============================
+        MAIN
+        |_ RESTAURANT LIST SECTION
+    ==============================*/
+
+    .restaurants {
+        background-color: $color__gray--light;
+        margin-top: 20px;
+        padding-block: 54px 63px;
+
+        &__title {
+            margin-bottom: 20px;
+        }
+
+        &__container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 17px;
+        }
+    }
+
+    .restaurant-card {
+        background: white;
+        overflow: hidden;
+        border-radius: 14px;
+        position: relative;
+        @include add-shadow;
+
+        &:nth-child(-n+2) {
+            @include card-badge;
+        }
+
+        &__thumbnail {
+            width: 100%;
+            height: 172px;
+            overflow: hidden;
+            object-fit: cover;
+            object-position: 50% 60%;
+        }
+
+        &__footer {
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 16px 24px 16px 12px;
+
+            &__name {
+                margin-bottom: 2px;
+            }
+
+            &__location {
+                font-size: $font-size__base--small;
+            }
+
+            &__favorite {
+                @include heart-btn(24px, 5px);
+            }
+        }
+    }
+}

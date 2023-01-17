@@ -1,0 +1,62 @@
+//BUTTON
+.button {
+    $height: 50px;
+    $padding: $height * .45;
+    @include center-horizontally-and-vertically;
+    @include add-shadow;
+    @include add-gradient($color__purple--light, $color__purple);
+    font-size: $font-size__base--smaller;
+    color: white;
+    min-height: $height;
+    padding: calc(-1vw + 16px) $padding;
+    border-radius: $height * .8;
+    transition: filter 400ms, box-shadow 400ms;
+
+    &:hover {
+        filter: brightness(1.05);
+        @include add-shadow(40%);
+    }
+}
+
+@mixin card-badge {
+    &::before {
+        content: "Nouveau";
+        color: $color__featured_text;
+        background-color: $color__featured;
+        position: absolute;
+        top: 14px;
+        right: 10px;
+        padding: 7px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
+
+@mixin heart-btn($font-size, $offset: 0px) {
+    i {
+        font-size: $font-size;
+        margin-top: $offset;
+        position: relative;
+
+        &::after {
+            content: "\f004";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            @include add-gradient($color__purple, $color__purple--light);
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        &:hover {
+            cursor: pointer;
+            &::after {
+                opacity: 1;
+                transition: opacity 300ms ease-out;
+            }
+        }
+    }
+}
